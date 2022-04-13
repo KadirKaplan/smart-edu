@@ -17,12 +17,17 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    role: {
+        type: String,
+        enum: ["student", "teacher", "admin"],
+        default: "student"
     }
 });
 //hash (Crypt)
 UserSchema.pre('save', function (next) {
     const user = this;
-    bcrypt.hash(user.password, 10,(error,hash) =>{
+    bcrypt.hash(user.password, 10, (error, hash) => {
         user.password = hash;
         next();
     })
