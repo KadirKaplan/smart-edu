@@ -13,8 +13,26 @@
 <div id="overviews" class="section wb">
   <div class="container">
     <div class="row">
+      
       <div class="col-lg-9 blog-post-single">
+        <% if(flashMessages) { %> 
+
+          <% if(flashMessages.success) { %> 
+              <div class="alert alert-success">
+                  <%= flashMessages.success %>
+              </div>
+          <% %> 
+  
+          <% } if(flashMessages.error) { %> 
+              <div class="alert alert-danger">
+                  <%= flashMessages.error %>
+              </div>
+          <% }%> 
+          
+          
+      <% }%>
         <div class="row">
+          
           <% for( let i=0; i< courses.length;i++) { %>
           <div class="col-lg-6 col-md-6 col-12">
             <div class="course-item mb-5">
@@ -30,15 +48,19 @@
                   </h2>
                 </div>
                 <div class="course-desc">
-                  <p><%=courses[i].description%></p>
+                  <p><%=courses[i].description.substring(0,50) + '...'%></p>
                 </div>
               </div>
+             
               <div class="course-meta-bot">
+                
                 <ul>
                   <li>
-                    <i class="fa fa-user" aria-hidden="true"></i>Teacher Name
+                    <i  aria-hidden="true"></i>Teacher Name : <%= courses[i].user.name %>
                   </li>
+                  
                 </ul>
+                
               </div>
             </div>
           </div>
@@ -51,16 +73,16 @@
       <div class="col-lg-3 col-12 right-single">
         <div class="widget-search">
           <div class="site-search-area">
-            <form method="get" id="site-searchform" action="#">
+            <form method="GET" id="site-searchform" action="#">
               <div>
                 <input
                   class="input-text form-control"
-                  name="search-k"
+                  name="search"
                   id="search-k"
-                  placeholder="Search keywords..."
+                  placeholder="Search"
                   type="text"
                 />
-                <input id="searchsubmit" value="Search" type="submit" />
+                <button id="searchsubmit" value="Search" type="submit" ></button> 
               </div>
             </form>
           </div>
